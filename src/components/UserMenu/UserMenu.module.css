@@ -1,0 +1,13 @@
+.userMenu {
+  margin-right: 10px;
+}
+.welcomeMessage {
+  margin-right: 10px;
+}
+.userMenuBtn {
+  padding: 3px 5px;
+  color: #ffffff;
+  background-color: #3317d1;
+  border: none;
+  border-radius: 3px;
+}
