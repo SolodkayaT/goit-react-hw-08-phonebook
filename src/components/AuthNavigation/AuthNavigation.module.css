@@ -1,13 +1,15 @@
 .navigationMenu {
   justify-content: center;
   display: flex;
+  color: inherit;
   margin: 20px 0;
 }
+
 .navigationLink {
   padding: 0 20px;
-  text-transform: uppercase;
-  text-decoration: none;
   color: inherit;
+  text-decoration: none;
+  text-transform: uppercase;
 }
 .navigationLinkActive {
   color: #3317d1;

@@ -2,9 +2,10 @@ import React, { lazy, Suspense, Component } from "react";
 import { Switch, Route } from "react-router-dom";
 import routes from "../../routes";
 import Loader from "react-loader-spinner";
-import Layout from "../../components/Layout/Layout";
 import { authOperations } from "../../redux/auth";
 import { connect } from "react-redux";
+import PrivateRoute from "../PrivateRoute/PrivateRoute";
+import PublicRoute from "../PublicRoute/PublicRoute";
 
 const Contacts = lazy(() => import("../../views/Contacts/Contacts"));
 const HomePage = lazy(() => import("../../views/HomePage/HomePage"));
@@ -20,28 +21,41 @@ class App extends Component {
   render() {
     return (
       <>
-        <Layout>
-          <Suspense
-            fallback={
-              <Loader
-                type="Puff"
-                color="#00BFFF"
-                height={100}
-                width={100}
-                timeout={3000}
-              />
-            }
-          >
-            <AppBar />
-            <Switch>
-              <Route path="/" exact component={HomePage} />
-              <Route path={routes.register} exact component={Register} />
-              <Route path={routes.login} component={Login} />
-              <Route path={routes.contacts} component={Contacts} />
-              <Route component={NotFound} />
-            </Switch>
-          </Suspense>
-        </Layout>
+        <Suspense
+          fallback={
+            <Loader
+              type="Puff"
+              color="#00BFFF"
+              height={100}
+              width={100}
+              timeout={3000}
+            />
+          }
+        >
+          <AppBar />
+          <Switch>
+            <PublicRoute
+              path={routes.home}
+              exact
+              component={HomePage}
+              restricted={false}
+            />
+            <PublicRoute
+              path={routes.login}
+              exact
+              component={Login}
+              restricted={true}
+            />
+            <PublicRoute
+              path={routes.register}
+              exact
+              component={Register}
+              restricted={true}
+            />
+            <PrivateRoute path={routes.contacts} exact component={Contacts} />
+            <Route component={NotFound} />
+          </Switch>
+        </Suspense>
       </>
     );
   }

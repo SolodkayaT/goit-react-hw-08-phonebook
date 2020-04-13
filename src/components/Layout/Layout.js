@@ -9,13 +9,17 @@ class Layout extends Component {
     return (
       <>
         <ThemeContext.Consumer>
-          {theme => (
+          {(theme) => (
             <div
               className={styles.body}
-              style={{ color: theme.fontColor, background: theme.bodyBg }}
+              style={{
+                color: theme.fontColor,
+                background: theme.bodyBg,
+                boxShadow: theme.boxShadow,
+              }}
             >
               {this.props.toggle && (
-                <SwitchTheme onToggleTheme={e => this.props.toggle(e)} />
+                <SwitchTheme onToggleTheme={(e) => this.props.toggle(e)} />
               )}
               {this.props.children}
             </div>

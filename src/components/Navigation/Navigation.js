@@ -1,52 +1,36 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import routes from "../../routes";
+import { connect } from "react-redux";
+import { authSelectors } from "../../redux/auth";
 import styles from "../Navigation/Navigation.module.css";
 
-const Navigation = () => {
+const Navigation = ({ isAuthenticated }) => {
   return (
-    <ul className={styles.navigationMenu}>
-      <li className={styles.navigationMenuItem}>
-        <NavLink
-          exact
-          to={routes.home}
-          activeStyle={{ color: "blue" }}
-          className={styles.navigationLink}
-        >
-          Home
-        </NavLink>
-      </li>
-      <li className={styles.navigationMenuItem}>
-        <NavLink
-          to={routes.register}
-          activeStyle={{ color: "blue" }}
-          className={styles.navigationLink}
-        >
-          Register
-        </NavLink>
-      </li>
-      <li className={styles.navigationMenuItem}>
-        <NavLink
-          exact
-          to={routes.login}
-          activeStyle={{ color: "blue" }}
-          className={styles.navigationLink}
-        >
-          Login
-        </NavLink>
-      </li>
-      <li className={styles.navigationMenuItem}>
+    <div className={styles.navigationMenu}>
+      <NavLink
+        exact
+        to={routes.home}
+        activeStyle={{ color: "#3317d1" }}
+        className={styles.navigationLink}
+      >
+        Home
+      </NavLink>
+      {isAuthenticated && (
         <NavLink
           exact
           to={routes.contacts}
-          activeStyle={{ color: "blue" }}
+          activeStyle={{ color: "#3317d1" }}
           className={styles.navigationLink}
         >
           Contacts
         </NavLink>
-      </li>
-    </ul>
+      )}
+    </div>
   );
 };
 
-export default Navigation;
+const mapStateToProps = (state) => ({
+  isAuthenticated: authSelectors.isAuthenticated(state),
+});
+export default connect(mapStateToProps)(Navigation);

@@ -3,12 +3,12 @@ import React from "react";
 export const themeConfig = {
   light: {
     fontColor: "black",
-    bodyBg: "white"
+    bodyBg: "white",
   },
   dark: {
     fontColor: "white",
-    bodyBg: "black"
-  }
+    bodyBg: "black",
+  },
 };
 
 const ThemeContext = React.createContext(themeConfig);
