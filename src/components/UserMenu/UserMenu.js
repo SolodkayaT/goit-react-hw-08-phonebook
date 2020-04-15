@@ -1,6 +1,7 @@
 import React from "react";
 import { authSelectors, authOperations } from "../../redux/auth";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
 import styles from "./UserMenu.module.css";
 
 const UserMenu = ({ name, onLogout }) => (
@@ -15,6 +16,15 @@ const UserMenu = ({ name, onLogout }) => (
 const mapStateToProps = (state) => ({
   name: authSelectors.getUserName(state),
 });
+
+UserMenu.propTypes = {
+  name: PropTypes.string,
+  onLogout: PropTypes.func,
+};
+
+UserMenu.defaultProps = {
+  name: "",
+};
 export default connect(mapStateToProps, { onLogout: authOperations.logOut })(
   UserMenu
 );

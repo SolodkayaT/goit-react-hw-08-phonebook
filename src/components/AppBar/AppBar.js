@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
 import Navigation from "../Navigation/Navigation";
 import UserMenu from "../UserMenu/UserMenu";
 import AuthNavigation from "../AuthNavigation/AuthNavigation";
@@ -15,4 +16,12 @@ const AppBar = ({ isAuthenticated }) => (
 const mapStateToProps = (state) => ({
   isAuthenticated: authSelectors.isAuthenticated(state),
 });
+
+AppBar.propTypes = {
+  isAuthenticated: PropTypes.string,
+};
+
+AppBar.defaultProps = {
+  isAuthenticated: "",
+};
 export default connect(mapStateToProps)(AppBar);

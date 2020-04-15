@@ -1,8 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import contactsSelectors from "../../redux/contacts/contactsSelectors";
-import contactsOperations from "../../redux/contacts/contactsOperations";
+import { contactsSelectors, contactsOperations } from "../../redux/contacts";
 import styles from "./ContactListItem.module.css";
 import ContactListButton from "../ContactListButton/ContactListButton";
 
@@ -23,14 +22,14 @@ function ContactListItem({ name, number, keys, onRemove }) {
 ContactListItem.defaultProps = {
   name: "",
   phone: "",
-  keys: ""
+  keys: "",
 };
 
 ContactListItem.propTypes = {
   name: PropTypes.string,
   phone: PropTypes.string,
   keys: PropTypes.string,
-  onRemove: PropTypes.func
+  onRemove: PropTypes.func,
 };
 
 const mapStateToProps = (state, ownProps) => {
@@ -39,6 +38,6 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  onRemove: () => dispatch(contactsOperations.removeContact(ownProps.id))
+  onRemove: () => dispatch(contactsOperations.removeContact(ownProps.id)),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(ContactListItem);

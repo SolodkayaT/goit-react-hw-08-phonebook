@@ -1,5 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import PropTypes from "prop-types";
 import routes from "../../routes";
 import { connect } from "react-redux";
 import { authSelectors } from "../../redux/auth";
@@ -33,4 +34,12 @@ const Navigation = ({ isAuthenticated }) => {
 const mapStateToProps = (state) => ({
   isAuthenticated: authSelectors.isAuthenticated(state),
 });
+
+Navigation.propTypes = {
+  isAuthenticated: PropTypes.string,
+};
+
+Navigation.defaultProps = {
+  isAuthenticated: "",
+};
 export default connect(mapStateToProps)(Navigation);

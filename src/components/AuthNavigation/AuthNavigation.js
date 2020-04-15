@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import routes from "../../routes";
-import styles from "../Navigation/Navigation.module.css";
+import styles from "./AuthNavigation.module.css";
 
 const AuthNavigation = () => {
   return (

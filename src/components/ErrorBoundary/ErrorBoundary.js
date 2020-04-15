@@ -2,22 +2,32 @@ import React from "react";
 import styles from "./ErrorBoundary.module.css";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import contactsSelectors from "../../redux/contacts/contactsSelectors";
+import { contactsSelectors } from "../../redux/contacts";
+import { authSelectors } from "../../redux/auth";
 
-function Error({ error }) {
-  return <p className={styles.errorMessage}>{error.message}</p>;
+function Error({ contactError, authError }) {
+  return (
+    <p className={styles.errorMessage}>
+      {contactError.message}
+      {authError.message}
+    </p>
+  );
 }
 
 Error.defaultProps = {
-  message: "Something went wrong..."
+  contactError: "Something went wrong...",
+  authError: "Something went wrong...",
 };
 
 Error.propTypes = {
-  message: PropTypes.string
+  contactError: PropTypes.string,
+  authError: PropTypes.string,
 };
-const mapStateToProps = state => {
+
+const mapStateToProps = (state) => {
   return {
-    error: contactsSelectors.getError(state)
+    contactError: contactsSelectors.getError(state),
+    authError: authSelectors.getError(state),
   };
 };
 export default connect(mapStateToProps)(Error);

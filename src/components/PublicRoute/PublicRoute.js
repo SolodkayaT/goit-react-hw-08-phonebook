@@ -25,4 +25,5 @@ const PublicRoute = ({
 const mapStateToProps = (state) => ({
   isAuthenticated: authSelectors.isAuthenticated(state),
 });
+
 export default connect(mapStateToProps)(PublicRoute);

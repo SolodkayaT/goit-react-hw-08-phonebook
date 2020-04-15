@@ -10,15 +10,16 @@ const SwitchTheme = ({ onToggleTheme }) => {
         <input
           type="checkbox"
           checked={styles.checked}
-          onChange={e => onToggleTheme(e.target.value)}
+          onChange={(e) => onToggleTheme(e.target.value)}
         />
         <span className={styles.slider}></span>
       </label>
     </div>
   );
 };
-export default SwitchTheme;
 
 SwitchTheme.propTypes = {
-  onToggleTheme: PropTypes.func
+  onToggleTheme: PropTypes.func,
 };
+
+export default SwitchTheme;

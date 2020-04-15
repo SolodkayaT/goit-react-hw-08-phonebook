@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { authOperations } from "../../redux/auth";
+import { authOperations, authSelectors } from "../../redux/auth";
+import ErrorBoundary from "../../components/ErrorBoundary/ErrorBoundary";
 import styles from "./Register.module.css";
 
 class RegisterView extends Component {
@@ -27,7 +28,7 @@ class RegisterView extends Component {
     return (
       <div className={styles.section}>
         <h1 className={styles.title}>Register page</h1>
-
+        {this.props.isError && <ErrorBoundary />}
         <form onSubmit={this.handleSubmit} className={styles.form}>
           <label className={styles.formLabel}>
             Name
@@ -71,6 +72,10 @@ class RegisterView extends Component {
   }
 }
 
-export default connect(null, { onRegister: authOperations.register })(
-  RegisterView
-);
+const mapStateToProps = (state) => ({
+  isError: authSelectors.getError(state),
+});
+
+export default connect(mapStateToProps, {
+  onRegister: authOperations.register,
+})(RegisterView);

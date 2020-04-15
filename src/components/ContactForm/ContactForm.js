@@ -2,30 +2,27 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
-import contactsOperations from "../../redux/contacts/contactsOperations";
+import { contactsOperations } from "../../redux/contacts";
 import styles from "./ContactForm.module.css";
 
 class ContactForm extends Component {
   static propTypes = {
-    onAddContact: PropTypes.func
-  };
-  static defaultProps = {
-    onAddContact: () => {}
+    onAddContact: PropTypes.func,
   };
 
   state = {
     name: "",
-    phone: ""
+    phone: "",
   };
 
-  handleChange = e => {
+  handleChange = (e) => {
     const { name, value } = e.target;
     this.setState({
-      [name]: value
+      [name]: value,
     });
   };
 
-  hanleSubmit = e => {
+  hanleSubmit = (e) => {
     e.preventDefault();
     const { name, phone } = this.state;
     this.props.onAddContact(name, phone);
@@ -68,6 +65,6 @@ class ContactForm extends Component {
   }
 }
 const mapDispatchToProps = {
-  onAddContact: contactsOperations.addContact
+  onAddContact: contactsOperations.addContact,
 };
 export default connect(null, mapDispatchToProps)(ContactForm);

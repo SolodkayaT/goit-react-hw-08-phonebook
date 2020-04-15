@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import Loader from "react-loader-spinner";
 import PropTypes from "prop-types";
-import contactsSelectors from "../../redux/contacts/contactsSelectors";
+import { contactsSelectors } from "../../redux/contacts";
 import ContactListItem from "../ContactListItem/ContactListItem";
 import ErrorBoundary from "../ErrorBoundary/ErrorBoundary";
 import styles from "./ContactList.module.css";
@@ -30,18 +30,18 @@ function ContactList({ contacts, isLoadingContacts, isError }) {
 }
 
 ContactList.defaultProps = {
-  contacts: []
+  contacts: [],
 };
 
 ContactList.propTypes = {
-  contacts: PropTypes.array
+  contacts: PropTypes.array,
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     contacts: contactsSelectors.getVisibleContacts(state),
     isLoadingContacts: contactsSelectors.getLoading(state),
-    isError: contactsSelectors.getError(state)
+    isError: contactsSelectors.getError(state),
   };
 };
 

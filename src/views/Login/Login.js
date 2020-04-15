@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { authOperations } from "../../redux/auth";
+import { authOperations, authSelectors } from "../../redux/auth";
+import ErrorBoundary from "../../components/ErrorBoundary/ErrorBoundary";
 import styles from "./Login.module.css";
+
 class LoginView extends Component {
   state = {
     email: "",
@@ -25,7 +27,7 @@ class LoginView extends Component {
     return (
       <div className={styles.section}>
         <h1 className={styles.title}>Login page</h1>
-
+        {this.props.isError && <ErrorBoundary />}
         <form onSubmit={this.handleSubmit} className={styles.form}>
           <label className={styles.formLabel}>
             Email
@@ -57,5 +59,10 @@ class LoginView extends Component {
     );
   }
 }
+const mapStateToProps = (state) => ({
+  isError: authSelectors.getError(state),
+});
 
-export default connect(null, { onLogin: authOperations.logIn })(LoginView);
+export default connect(mapStateToProps, { onLogin: authOperations.logIn })(
+  LoginView
+);
